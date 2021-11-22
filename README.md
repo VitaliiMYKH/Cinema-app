@@ -5,7 +5,7 @@ Using this app, user can register, and buy ticket for an available movie.
 Authentication and authorization is realized with Spring Security,
 if you don`t want to register new user, you can some which already in the system:
 - {login: user@gmail.com, password: u12345, Role: user} 
-- {login: admin@gmail.com, password: a12345, Role: admin}
+- {login: admin@gmail.com, password: a12345, Role: admin} </br>
 It is recommended to use Postman for sending POST requests.
 
 ## Technologies used in this app:
