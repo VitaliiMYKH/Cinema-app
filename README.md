@@ -1,72 +1,40 @@
-# Spring security part 2
+# Cinema service
+Here are simple implementation of cinema service app.
+This project was created to show my knowledge in Spring core, Spring Web, Spring Security.
+So app is created based on SOLID principles and have 3-tier architecture.
+Using this app, user can register, and buy ticket for an available movie.
+It is recommended to use Postman for sending POST requests.
 
-- Configure DB authentication instead of In memory authentication
-- Add Role entity, Dao and Service layer for it.
-    ```java
-      public interface RoleService {
-          void add(Role role);
-      
-          Role getRoleByName(String roleName);
-      }
-    ```
+## Technologies used in this app:
+- JDK 11
+- Tomcat version 9.0.54
+- Maven
+- Hibernate
+- MySQL Database
+- Spring Core
+- Spring Security
+- Spring Web
 
-- Configure role access to specific resources for `ADMIN` and for `USER`.
-  You should configure access to __all endpoints__ in your application. Example:
-```
-POST: /register - all
-GET: /cinema-halls - user/admin
-POST: /cinema-halls - admin
-GET: /movies - user/admin
-POST: /movies - admin
-GET: /movie-sessions/available - user/admin
-GET: /movie-sessions/{id} - user/admin
-POST: /movie-sessions - admin
-PUT: /movie-sessions/{id} - admin
-DELETE: /movie-sessions/{id} - admin
-GET: /orders - user
-POST: /orders/complete - user
-PUT: /shopping-carts/movie-sessions - user
-GET: /shopping-carts/by-user - user
-GET: /users/by-email - admin
-...
-``` 
+## User can interact with application by using next url`s:
+- Registration(POST:/register), authentication(/login), authorization and logout(/logout) processes
+- Add movie session to shopping cart (PUT: /shopping-carts/movie-sessions?movieSessionId)
+- Get shopping cart by user (GET: /shopping-carts/by-user)
+- Add cinema hall (POST: /cinema-halls)
+- Get all cinema halls (GET: /cinema-halls)
+- Add movie (POST: /movies)
+- Get all movies (GET: /movies) 
+- Add movie sessions(POST: /movie-sessions)
+- Get all available movie sessions (GET: /movie-sessions/available?movieId&date)
+- Delete or update movie session by id (DELETE: /movie-sessions/{id})
+- Complete order (POST: /orders/complete)
+- Get orders history for user (GET: /orders)
+- Get user by email (GET: /users/by-email?email)
 
-HINT:
-- It's up to you what type for RoleName field to choose(String/Enum) but enum would be preferable in most cases.
-- Roles and first Admin user can be injected inside DataInitializer class using annotation @PostConstruct.
-```java
-@PostConstruct
-public void inject() {
-  Role adminRole = new Role();
-  adminRole.setName("ADMIN");
-  roleService.add(adminRole);
-  Role userRole = new Role();
-  userRole.setName("USER");
-  roleService.add(userRole);
-  User user = new User();
-  user.setEmail("admin@i.ua");
-  user.setPassword("admin123");
-  user.setRoles(Set.of(adminRole));
-  userService.add(user);
-}
-```
-- You can specify the different HTTP method access for the same endpoint. For example:
-
-```plainjava
-        protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/movies/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/movies/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .permitAll()
-                .and()
-                .httpBasic()
-                .and()
-                .csrf().disable();
-    }
-```
-
-__You can check yourself using this__ [checklist](https://mate-academy.github.io/jv-program-common-mistakes/java-spring/security-part-2/jv-spring-security-checklist)
+## To deploy this project you need to:
+- Install Tomcat web-server version 9.54
+- Install MySQL DBMS
+- Fork this project to your repository
+- Clone it locally in your IDE
+- Open this file(src/main/resources/db.properties), and change db credentials
+- Configure Tomcat in your IDE
+- Run project and register your user
