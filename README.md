@@ -1,8 +1,11 @@
 # Cinema service
 Here are simple implementation of cinema service app.
-This project was created to show my knowledge in Spring core, Spring Web, Spring Security.
-So app is created based on SOLID principles and have 3-tier architecture.
+App is created based on SOLID principles and have 3-tier architecture.
 Using this app, user can register, and buy ticket for an available movie.
+Authentication and authorization is realized with Spring Security,
+if you don`t want to register new user, you can some which already in the system:
+- {login: user@gmail.com, password: u12345, Role: user} 
+- {login: admin@gmail.com, password: a12345, Role: admin}
 It is recommended to use Postman for sending POST requests.
 
 ## Technologies used in this app:
