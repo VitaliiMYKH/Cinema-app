@@ -18,7 +18,7 @@ It is recommended to use Postman for sending POST requests.
 - Spring Security
 - Spring Web
 
-## User can interact with application by using next url`s:
+## This app has following endpoints:
 - Registration(POST:/register), authentication(/login), authorization and logout(/logout) processes
 - Add movie session to shopping cart (PUT: /shopping-carts/movie-sessions?movieSessionId)
 - Get shopping cart by user (GET: /shopping-carts/by-user)
